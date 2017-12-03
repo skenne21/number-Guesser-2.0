@@ -1,0 +1,24 @@
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+html {
+  font-size: 1em;
+}
+
+body { 
+  margin: 0;
+}
+
+
+header {
+  text-align: center;
+  color: #E6E7E8;
+  font-weight: 300;
+  background-color: #404041;
+}
+
+
+main {
+  text-align: center;
+}
