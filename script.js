@@ -1,135 +1,115 @@
-var submitInput = document.querySelector('.submit-btn');
-var gameData = {};
-var verifyInput = document.querySelector('#user-guess');
-  
-verifyInput.addEventListener('keyup', disabledButton);
-submitInput.addEventListener('click', userInput);
+var userGuess = document.querySelector('#user-guess');
+var submitButton = document.querySelector('.submit-btn');
+var clearButton = document.querySelector('.clear-btn');
+var resetButton = document.querySelector('.reset-btn');
+var randomNumber;
+var minNumber;
+var maxNumber;
+var counter = 0;
 
-
-function randomNumberGenerator(min, max) {
-  gameData.minNumber = 0;
-  gameData.maxNumber = 100;
-  // sets min and max of user input or if user wins and incresses by 10 and -10;
-  gameData.randomNumber = Math.floor(Math.random() * (gameData.maxNumber - gameData.minNumber  +1) + gameData.minNumber); 
-}
-
-randomNumberGenerator();
-// verifyInputfields();
-
-// function verifyInputfields() {
-// }
+generateRandomNumber();
 
 function userInput() {
   event.preventDefault();
-  gameData.userGuess = parseInt(document.querySelector('#user-guess').value);
-  notAnNumber();
-  console.log(gameData)
-}
-
-function notAnNumber() {
-  if (isNaN(gameData.userGuess)) {
-    appenedText();
-    document.querySelector('.min-max-text').innerHTML = 'That was Not a Number, Guess Again!'
-  }
-  verifyWithInRange();
+  counter++;
+  userGuess = parseInt(userGuess.value);
+  console.log('userGuess' , userGuess);
+  console.log('gamecounter', counter)
+  valueIsANumber();
   readySecondaryButtons();
-  // should I change the h2 element to be more user friendly?
-  // changes appened text and h2
-}
+};
 
-function verifyWithInRange() {
-  if (gameData.userGuess < gameData.minNumber) {
-    minMaxText();
-  } else if (gameData.userGuess > gameData.maxNumber) {
-    minMaxText();
+function generateRandomNumber() {
+  minNumber = 0;
+  maxNumber = 100;
+  randomNumber = Math.floor(Math.random() * (maxNumber - minNumber)) + minNumber;
+  console.log('randomNumber', randomNumber);
+};
+
+function valueIsANumber() {
+  if(isNaN(userGuess) === true) {
+    gameTextHint();
+    document.querySelector('.min-max-text').innerHTML = `
+    Your Was Not In Range, Pick a Number Between ${minNumber}  and ${maxNumber} !`
+  } else {
+    verifyNumberRange();
+  };
+};
+
+function verifyNumberRange() {
+  if (userGuess < minNumber || userGuess > maxNumber) {
+    gameTextHint();
+    document.querySelector('.min-max-text').innerHTML = `
+    Your Was Not In Range, Pick a Number Between ${minNumber}  and ${maxNumber} !`;
   } else {
     compareNumbers();
-    }
-}
-
-function minMaxText() {
-  appenedText();
-  document.querySelector('.min-max-text').innerHTML = 
-    'That Number Was Not In Range, Guess a Number Between ' + 
-    gameData.minNumber + ' and' + gameData.maxNumber;
-}
-  
-function appenedText () {
-  document.querySelector('.ui-text').innerHTML = 'Your Guess Was'; 
-  var appenedElement = document.querySelector('.user-data');
-  var createElement = document.createElement('h2');
-  createElement.classList.add('user-guess-text')
-  createElement.innerHTML = gameData.userGuess
-  appenedElement.appendChild(createElement);
-}
+  };
+};
 
 function compareNumbers() {
-  if (gameData.userGuess < gameData.randomNumber) {
-      appenedText();
-      document.querySelector('.min-max-text').innerHTML = 'Too Low, Try Again!!!';
-  } else if (gameData.userGuess > gameData.randomNumber) {
-      appenedText();
-      document.querySelector('.min-max-text').innerHTML = 'Too High, Try Again!!!';
-  } else if (gameData.userGuess === gameData.randomNumber) {
+  if (userGuess < randomNumber) {
+    gameTextHint();
+    document.querySelector('.min-max-text').innerHTML = 'Too Low, Guess Again!';
+  } else if (userGuess > randomNumber) {
+    gameTextHint();
+    document.querySelector('.min-max-text').innerHTML = 'Too High, Guess Again!';
+  } else if (userGuess === randomNumber) {
     correctGuess();
-  }
-}
+  }; 
+};
 
 function correctGuess() {
-  appenedText();
-  document.querySelector('.min-max-text').innerHTML = 'BOOM!!!, Play Again!';
-  randomNumberGenerator();
-  // reset min and max vaules
-  // call cear functon?      
-}
+  gameTextHint();
+  document.querySelector('.min-max-text').innerHTML = 'Boom, You Got It Right, Play Again!';
+  generateRandomNumber();
+  minNumber -= 10;
+  maxNumber +=10
+  counter = 0;
+  console.log('counter', counter, 'min', minNumber, 'max', maxNumber)
+};
+
+function gameTextHint() {
+  document.querySelector('.ui-text').innerHTML = 'Your Guess Was';
+  document.querySelector('.changed-text').innerHTML = `${userGuess}`;
+};
 
 function readySecondaryButtons() {
-  var clearInputButton = document.querySelector('.clear-btn');
-  clearInputButton.addEventListener('click', clearInput);
-  var resetButton = document.querySelector('.reset-btn');
-  resetButton.addEventListener('click', resetGame); 
+  clearButton.addEventListener('click', clearInput);
+  resetButton.addEventListener('click', resetGame);
+
+  // reset buttons
+}
+
+function enableButtons() {
+  submitButton.disabled = false; 
+  clearButton.disabled = false;
+  if (counter >= 5) {
+    resetButton.disabled = false;
+  }
 }
 
 function clearInput() {
   event.preventDefault();
   document.querySelector('#user-guess').value = '';
-  var createdElement = document.getElementsByClassName('user-guess-text');
-  createdElement = createdElement[0];
-  createdElement.parentNode.removeChild(createdElement);
+  userGuess = document.querySelector('#user-guess');
+  submitButton.setAttribute('disabled', true);
+  clearButton.setAttribute('disabled', true);
 }
 
 function resetGame() {
-  // remove h2
-  // reset innerHTml of text to start ui
-  // reset min and max vaule to 0 and 100;
-  // randomNumberGenerator();
+  counter = 0;
+  minNumber = 0; 
+  maxNumber = 100;
+  document.querySelector('#user-guess').value = '';
+  document.querySelector('.ui-text').innerHTML = 'Guess a Number';
+  document.querySelector('.changed-text').innerHTML = '';
+  document.querySelector('.min-max-text').innerHTML = 'Between ' + minNumber + ' and ' + maxNumber;
+  generateRandomNumber();
 }
 
- function gamecounter() {
-  // where should game counter be called to loop through all trys?
-   var counter = 0;
-   counter++
-   if (counter >=5) {
-    // enable reset button
-    // run reset function
-   }
-   // if user wins five times, able to create own inputs min and max
-}
+submitButton.addEventListener('click', userInput);
+userGuess.addEventListener('keyup', enableButtons);
 
-function disabledButton() {
-  if()
-}
-  // foucs into input fields
-  // if no input  all buttons disablled
-  // if input has value then disables submit and clear
-  // after submit clicked it redisables submit untill value
-  // reset disabled after 5 tries
-  // after submitbutton hit on allow clear button to be hit, cant reguess without clearing
-// }
-
-
-// buttons disabled if no input
-// can submit with enter key instead of click
-// change min and max values by 10 everytime user wins
-// get rid of vars at top of page, maybe add to function tha passes varibles to other functions
-// if user wins 5 times can set own min and max range
+// create ui that changes as the min and max number change
+// create button for user setting own range
+// how do I make random number change as the user wins have min and max 0 to 100 || what user sets or winning value 
