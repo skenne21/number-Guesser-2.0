@@ -7,24 +7,38 @@
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700" rel="stylesheet">
     </head>
     <body>
-     <header>
-      <h1><span>Number</span>Guesser</h1>
-     </header> 
+      <header>
+        <h1><span>Number</span>Guesser</h1>
+      </header> 
       <main>
         <form class="input-data">
-          <label for="user-guess">
-            <input id="user-guess" type="text" placeholder="Enter Your Guess Here">
-          </label>
-          <button class="submit-btn" disabled>Guess</button>
-          <button class="clear-btn" disabled>Clear</button>
+          <input id="user-guess" type="text" placeholder="Enter Your Guess Here" aria-label="input for number guess">
+          <div class="user-input-container">
+            <button class="user-input-btns submit-btn" disabled>Submit Guess</button>
+            <button class="user-input-btns clear-btn" disabled>Clear Guess</button>
+          </div>
         </form>
         <section class="user-data">
-          <h3 class="ui-text">Guess a Number</h3>
-          <h2 class="changed-text"></h2>
-          <h3 class="min-max-text">Between 0 and 100</h3>
+          <article class="min-max-section"></article>
+          <article>
+            <h3 class="ui-text">Guess a Number</h3>
+            <h2 class="changed-text"></h2>
+            <h3 class="feedback-text">Between 0 and 100</h3>
+          <button class="reset-btn" disabled>Reset</button>
+          </article>
         </section>
-        <button class="reset-btn" disabled>Reset</button>
       </main>
+      <footer>
+        <form class="min-max-data">
+          <h3 class="min-max-text">Pick Your Own Min & Max</h3>
+          <input id="min-value" type="text" placeholder="Enter Min Value" arira-label="min value input">
+          <input id="max-value" type="text" placeholder="Enter Max Value" arira-label="max-value input">
+          <div class="min-max-input-container">
+            <button class="user-btns submit-min-max" disabled> Submit Min & Max</button>
+            <button class="user-btns clear-min-max-values" disabled> Clear Min & Max</button>
+          </div>
+        </form>
+      </footer>
       <script src="script.js" type="text/javascript" rel="javascript"></script>
     </body>
   </html>

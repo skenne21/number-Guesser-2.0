@@ -3,22 +3,166 @@
 }
 
 html {
-  font-size: 1em;
+  font-size: 12px;
 }
 
 body { 
+  height: 100vh;
   margin: 0;
 }
 
-
 header {
+  height: 20%;
   text-align: center;
   color: #E6E7E8;
-  font-weight: 300;
   background-color: #404041;
 }
 
+h1 span {
+  color: #ED458B;
+  margin: 2.5rem;
+  font-weight: 700;
+}
+
+h1 {
+  position: relative;
+  top: 2rem;
+  font-size: 4rem;
+  margin: 0;
+  font-weight: 300;
+}
 
 main {
+  height: 93%;
   text-align: center;
 }
+
+.input-data {
+  position: relative;
+  height: 12rem;
+}
+
+#user-guess {
+  text-align: center;
+  font-size: 2rem;
+  position: relative;
+  left: 1rem;
+  margin: 1.5rem;
+  height: 2.85rem;
+  width: 34rem;
+}
+
+.user-input-container {
+  position: absolute;
+  right: 40.80rem;
+  margin: 0.15rem;
+}
+
+button {
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 18px;
+  background-color: #929497;
+  margin:1.5rem;
+  height: 2.65rem;
+  width: 10rem;
+}
+
+button:disabled {
+  background-color: #D0D2D3;
+}
+
+button:hover {
+  background-color: #eb008b;
+}
+
+button:active,
+button:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+h3 {
+  margin: 0.3rem;
+  color: #404041;
+  font-weight: 300;
+  font-size: 2.3rem;
+}
+
+h2 {
+  margin: 0.2rem;
+  color: #EB008b;
+  font-weight: 300;
+  font-size: 12rem;
+}
+
+.ui-text {
+  margin: 0.2rem;
+}
+
+.feedback-text {
+  width: 35rem;
+  margin: 1rem auto;
+}
+
+.min-max-data {
+  position: relative;
+  top: 3.5rem;
+}
+
+.min-max-data input {
+  margin-left: 0.3rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #404041;
+  width:8rem;
+  height:2rem;
+}
+
+.user-btns{
+  height: 2rem;
+  font-size: 1.3rem;
+  width:15rem;
+}
+
+#min-value {
+  margin-right: 10rem;
+}
+
+.user-input-btns {
+  width: 15rem;
+}
+
+.reset-btn {
+  width: 34rem;
+}
+
+h4 {
+  color: #eb008b ;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+footer {
+  height: 15rem;
+  text-align: center;
+  color: #E6E7E8;
+  background-color: #404041;
+}
+ 
+.min-max-text {
+  color: #eb008b;
+}
+
+
+
