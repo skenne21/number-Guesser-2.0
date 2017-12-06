@@ -130,6 +130,8 @@ function resetSubmitAndClearButton() {
   submitInput.setAttribute('disabled', true);
   clearButton.setAttribute('disabled', true);
 }
+
+
   
   // after submit clicked it redisables submit untill value
   // reset disabled after 5 tries
